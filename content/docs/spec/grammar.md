@@ -4,20 +4,23 @@ draft = false
 title = 'Alis Grammar'
 +++
 ```ebnf
-(* Note: the `.` special token is used to represent any non-newline character*)
+(*Note: the `.` special token is used to represent any non-newline character*)
+(*Another Note: This grammar is not meant to generate parsers, only to be used
+as documentation*)
 whitespace = {space | "\t" | "\n"}-;
 singleLineComment = "//", {? . ?}-, ? newline ?;
 multiLineComment = "/*", {? . ?}-, "*/";
+docComment = "///", {? . ?}-, ? newline ?;
 identifier = ("_" | alphabet), {"_" | alphabet | decimalDigit};
 shebang = "#!", {? . ?}, ? newline ?;
 
-integerDecimal = ["-"], {decimalDigit}-;
+integerDecimal = {decimalDigit}-;
 integerBinary = "0", ("b" | "B"), {"0" | "1"}-;
 integerHex = "0", ("x" | "X"), {hexadecimalDigit}-;
 integerScientific = (integerDecimal | literalFloat), "e", integerDecimal;
 literalInt = integerDecimal | integerBinary | integerHex | integerScientific;
 
-literalFloat = ["-"], {decimalDigit}-, ".", {decimalDigit}-;
+literalFloat = {decimalDigit}-, ".", {decimalDigit}-;
 literalString = ('"', {? . ? | '\"'}, '"') |
 				('"""', ? newline ?, {? . ? | '\"' | ? newline ?}, ? newline ?, '"""');
 literalChar = "'", (("\", ? . ?) | ? . ? | ("\", "'")), "'";
@@ -25,9 +28,10 @@ literalBool = "true" | "false";
 
 literalArray = "[", [{expr, ","}, expr], "]";
 
-def = ["ipub" | "pub"], {attribute},
-		 (fnDef | fnDef | globVarDef | structDef | unionDef | enumDef |
+def = {attribute},
+		 (fnDef | fnDef | varDef | structDef | unionDef | enumDef |
 			aliasDef | templateDef | import);
+globDef = ["ipub" | "pub"], def;
 
 test = "utest", [literalString], statement;
 
@@ -35,8 +39,8 @@ moduleIdentifier = {identifier, "."}, identifier;
 import = {moduleIdentifier, ["as", identifier], ","},
 			 moduleIdentifier, ["as", identifier], ";";
 
-statement = [cComp], ((expr | localVarDef | "break" | "continue"), ";" |
-					block, [";"] | if | for | while | doWhile | switch | mixinInit, ";");
+statement = (expr | "break" | "continue" | mixinInit), ";" |
+					block, [";"] | if | for | while | doWhile | switch | cComp | def;
 block = "{", {statement}, "}";
 if = "if", smExpr, statement, ["else", statement];
 for = "for", "(", [identifier, ";"], expr, identifier, ";", expr, ")", statement;
@@ -69,9 +73,7 @@ paramList = param | ("(", [{param, ","}, param], ")");
 param = ([smExpr], keyOptVal) | smExpr;
 fnAnon = "fn", paramList, "->", expr;
 
-globVarDef = ("var" | "const"), smExpr, {keyOptVal, ","}, keyOptVal, ";";
-localVarDef = ("var" | "const"), {attribute}, ["static"], smExpr,
-							{keyOptVal, ","}, keyOptVal, ";";
+varDef = ("var" | "const"), smExpr, {keyOptVal, ","}, keyOptVal, ";";
 
 aggMember = ["pub" | "ipub"], {attribute},
 					(smExpr, [{keyOptVal, ","}, keyOptVal] |
@@ -92,13 +94,13 @@ enumDef = "enum", smExpr, identifier, [tmParamList], ("=", expr, ";" |
 		"}"
 		);
 
-aliasDef = "alias", identifier, "=", expr, ";";
+aliasDef = "alias", identifier, [tmParamList], "=", expr, ";";
 
 anyBlock = "{", {? . ? | anyBlock} ,"}";
 
 templateDef = "template", ["mixin"], tmParamList, anyBlock;
 
-intrinsic = "$", identifier, ["(", [{expr, ","}, expr], ")"];
+intrinsic = "$", identifier;
 
 expr = smExpr, [block];
 smExpr = ("(", {expr, ","}, expr, ")") | intrinsic |
@@ -114,9 +116,9 @@ opBin = "." | "??" | "!! "| "is" | "!is" | "*" | "/" | "%" | "+" | "-" | "<<" |
 			"&&" | "||" | "=" | "+=" | "-=" | "*=" | "/=" | "%=" |
 			"&=" | "|=" | "^=" | "@=";
 
-opPre = "@" | "is" | "!is" | "!" | "++" | "--" | "~";
+opPre = "@" | "is" | "!is" | "!" | "++" | "--" | "~" | "-";
 
 opPost = "@" | "!" | "?" | "++" | "--" | "...";
 
-module = [shebang], {def | test | mixinInit, ";"};
+module = [shebang], {globDef | test | mixinInit, ";"};
 ```
