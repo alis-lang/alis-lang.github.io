@@ -12,7 +12,7 @@ programmers write maintainable code.
 The Alis Development Team includes:
 
 - Nafees Hassan - [Nafees10](https://github.com/Nafees10)
-- Sheikh M. Talha - [ShmdTalba](https://github.com/ShmdTalha)
+- Sheikh M. Talha - [ShmdTalha](https://github.com/ShmdTalha)
 - M. Usman Amjad - [MuhammadUsmanAmjad](https://github.com/MuhammadUsmanAmjad)
 
 ## Credits
