@@ -34,3 +34,8 @@ theme = 'hextra'
 		width = "wide"
 	[params.flexsearch]
 		index = "content"
+
+[markup]
+	[markup.goldmark]
+		[markup.goldmark.renderer]
+			unsafe = true
