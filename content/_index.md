@@ -53,7 +53,7 @@ with a Powerful Template System
 
 {{< hextra/feature-card
 	title="Easy to Ship"
-	subtitle="Compile Alis code to Platform Indepent Alis ByteCode."
+	subtitle="Compile Alis code to Platform Independent Alis ByteCode."
 >}}
 
 {{< hextra/feature-card
