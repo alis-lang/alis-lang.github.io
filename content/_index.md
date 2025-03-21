@@ -9,13 +9,13 @@ toc = false
 {{< hextra/hero-headline >}}
 Alis
 
-Scripting Language
+Language
 {{< /hextra/hero-headline >}}
 </div>
 
 <div class="hx-mb-12">
 {{< hextra/hero-subtitle >}}
-Simple, Powerful, and Type-Safe
+A Simple & Type-Safe Scripting Language
 {{< /hextra/hero-subtitle >}}
 
 {{< hextra/hero-subtitle >}}
@@ -42,13 +42,13 @@ with a Powerful Template System
 >}}
 
 {{< hextra/feature-card
-	title="Easy to Embed"
-	subtitle="Quickly embed Alis as a scripting language in your programs."
+	title="Easy to Run"
+	subtitle="Use the Alis Standalone to run Alis code on any platform."
 >}}
 
 {{< hextra/feature-card
-	title="Easy to Run"
-	subtitle="Use the Alis Standalone to run Alis code on any platform."
+	title="Easy to Test"
+	subtitle="Use the built-in Unit Tests to quickly test your code."
 >}}
 
 {{< hextra/feature-card
@@ -57,8 +57,8 @@ with a Powerful Template System
 >}}
 
 {{< hextra/feature-card
-	title="Easy to Test"
-	subtitle="Use the built-in Unit Tests to quickly test your code."
+	title="Easy to Embed"
+	subtitle="Quickly embed Alis as a scripting language in your programs."
 >}}
 
 {{< /hextra/feature-grid >}}
