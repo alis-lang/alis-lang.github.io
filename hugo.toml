@@ -1,4 +1,4 @@
-baseURL = 'https://alis-lang.github.io/'
+baseURL = 'https://alis-lang.nafees.dev/'
 languageCode = 'en-us'
 title = 'Alis Language'
 theme = 'hextra'
@@ -16,7 +16,7 @@ theme = 'hextra'
 	[[menu.main]]
 		weight = 3
 		name = 'Source'
-		url = 'https://github.com/alis-lang'
+		url = 'https://github.com/nafees10/alis'
 	[[menu.main]]
 		weight = 4
 		name = 'Search'
